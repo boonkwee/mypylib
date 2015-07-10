@@ -587,7 +587,7 @@ def two_dim_list2xls(sht=xlwt.Worksheet, data=None, col_width=None, x_offset=0, 
             try:
                 if isinstance(cell, unicode):
                     tcell = cell.encode('utf-8')
-                elif isinstance(cell, Decimal) or isinstance(cell, float):
+                elif type(cell) in [Decimal, float]:
                     tcell = float(cell)
                 elif isinstance(cell, int):
                     tcell = int(cell)
