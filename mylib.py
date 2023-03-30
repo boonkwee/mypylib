@@ -85,7 +85,7 @@ def time_stringms():
     return "%02d%02d%02d%06d" % (t.hour, t.minute, t.second, t.microsecond)
 
 
-def transpose(lists):
+def transpose(lists, defaultIfNone=None):
     """
     transpose a list from either row-oriented to column-oriented or vis-a-vis
     replace None values with defval
@@ -113,17 +113,10 @@ def transpose(lists):
     """
     if not lists:
         return []
-    return map(lambda *row: list(row), *lists)
-
-
-def transpose2(lists, defval=0):
-    """
-    replace None values with defval
-    both function courtesy of http://code.activestate.com/recipes/410687/
-    """
-    if not lists:
-        return []
-    return map(lambda *row: [elem or defval for elem in row], *lists)
+    default_value = defaultIfNone # Set default_value to None
+    transposed = [[row[i] if row[i] is not None else default_value for row in lists] 
+                  for i in range(len(lists[0]))]
+    return transposed
 
 
 def ddmmmyyyyToDate(s):
